@@ -1,37 +1,55 @@
 const gameBoard=document.querySelector(".maingame");
 
- let gamecells=["","","","","","","","",""];
- 
 
-const myplayer=(playermark)=>({
+
+const myplayer=(playermark,playername)=>({
         playermark,
-        makemove(){
-            return playermark
-        }
-         
-});     
-        const playerx=myplayer("x");
-        const playerO=myplayer("O");
-        const playerOmarker=playerO.makemove();
-        const playerXmarker=playerx.makemove();
-         
-function createBoard(){
-        gamecells.forEach(()=>{
+        playername,
+        getmark(){
+            return playermark;
+        },
+        getname(){
+          return playername;
+        }  
+}); 
+const initialiseGame=()=>{
+      let gamecells=["","","","","","","","",""];
+
+      const getBoard=()=>gamecells;
+
+      const placemark=(i,mark)=>{
+            if(gamecells[i]===""){
+                gamecells[i]=mark;
+                return true;
+            }
+            return false;
+      }
+
+      function createBoard(){
+        gamecells.forEach((mark,i)=>{
         const slot =document.createElement('div');
         slot.classList.add('mycell');
-        slot.addEventListener("click",()=>{
-            if(slot.textContent===""){
-                slot.textContent=playerXmarker
-            }
-          else if(slot.textContent===""&&slot.textContent!==playerXmarker){
-                slot.textContent=playerOmarker
-            }
-        })
-        gameBoard.append(slot);
+        slot.dataset.i=i;
+        slot.textContent=mark;
+        gameBoard.append(slot)
+
     })
+     }
 
-}
+      const resetBoard=()=>{
+        gamecells=["","","","","","","","",""];
+      }
 
+    return {getBoard,placemark, createBoard,resetBoard};
+};
 
-createBoard();
-
+ const displayBoard=()=>{
+  const playeX=myplayer("X","PlayerX");
+   const playerO=myplayer("O","PlayerO")
+  const squares=initialiseGame();
+   squares.getBoard();
+   squares.createBoard();
+ 
+ }
+ 
+ displayBoard();
