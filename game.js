@@ -95,6 +95,11 @@ function createBoard() {
 
       gameBoard.append(slot);
     });
+     restart.addEventListener("click",()=>{
+      const over=initialiseGame()
+    over.resetBoard();
+    main.removeChild(restart);
+  })
   }
 
   const resetBoard = () => {
@@ -109,10 +114,6 @@ function createBoard() {
 const displayBoard = () => {
   const squares = initialiseGame();
   squares.createBoard();
-  restart.addEventListener("click",()=>{
-    squares.resetBoard();
-    main.removeChild(restart);
-  })
 };
 
 displayBoard();
