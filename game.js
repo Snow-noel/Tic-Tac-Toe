@@ -16,6 +16,7 @@ const myplayer = (playermark, playername) => ({
 });
 
 const initialiseGame = () => {
+  let gameover=false
   let gamecells = ["", "", "", "", "", "", "", "", ""];
   const playeX = myplayer("X", "PlayerX");
   const playerO = myplayer("O", "PlayerO");
@@ -56,6 +57,7 @@ function checkWinner() {
   return null; 
 }
 function createBoard() {
+  
     gameBoard.textContent = "";
 
     gamecells.forEach((mark, i) => {
@@ -65,25 +67,30 @@ function createBoard() {
       slot.textContent = mark;
 
       slot.addEventListener("click", () => {
-        if (placemark(i, currentplayer.getmark())) {
-          slot.textContent = currentplayer.getmark(); 
-          const winner=checkWinner();
-          if(winner){
-            turn.textContent=`Player${winner} Wins the Game`;
-            main.append(restart);
-            slot.placemark();
-            return;
-          }
-              if (!gamecells.includes("")) {
-              turn.textContent="its a draw"
-              main.append(restart)
-              
+        if(gameover)
+          return;
+            
+          if(placemark(i, currentplayer.getmark())) {
+            slot.textContent = currentplayer.getmark(); 
+            const winner=checkWinner();
+            if(winner){
+              turn.textContent=`Player${winner} Wins the Game`;
+              gameover=true;
+              main.append(restart);
+              slot.placemark();
               return;
             }
+                if (!gamecells.includes("")) {
+                turn.textContent="its a draw"
+                gameover=true
+                main.append(restart)
+                
+                return;
+              }
 
-          currentplayer = currentplayer === playeX ? playerO : playeX;
-          turn.textContent=`${currentplayer.getname()}'s turn`;
-        }
+            currentplayer = currentplayer === playeX ? playerO : playeX;
+            turn.textContent=`${currentplayer.getname()}'s turn`;
+          }
       });
 
       gameBoard.append(slot);
