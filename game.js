@@ -1,55 +1,63 @@
-const gameBoard=document.querySelector(".maingame");
+const gameBoard = document.querySelector(".maingame");
 
+const myplayer = (playermark, playername) => ({
+  playermark,
+  playername,
+  getmark() {
+    return playermark;
+  },
+  getname() {
+    return playername;
+  }
+});
 
+const initialiseGame = () => {
+  let gamecells = ["", "", "", "", "", "", "", "", ""];
+  const playeX = myplayer("X", "PlayerX");
+  const playerO = myplayer("O", "PlayerO");
+  let currentplayer = playeX;
 
-const myplayer=(playermark,playername)=>({
-        playermark,
-        playername,
-        getmark(){
-            return playermark;
-        },
-        getname(){
-          return playername;
-        }  
-}); 
-const initialiseGame=()=>{
-      let gamecells=["","","","","","","","",""];
+  const getBoard = () => gamecells;
 
-      const getBoard=()=>gamecells;
+  const placemark = (i, mark) => {
+    if (gamecells[i] === "") {
+      gamecells[i] = mark;
+      return true;
+    }
+    return false;
+  };
 
-      const placemark=(i,mark)=>{
-            if(gamecells[i]===""){
-                gamecells[i]=mark;
-                return true;
-            }
-            return false;
-      }
+  function createBoard() {
+    gameBoard.textContent = "";
 
-      function createBoard(){
-        gamecells.forEach((mark,i)=>{
-        const slot =document.createElement('div');
-        slot.classList.add('mycell');
-        slot.dataset.i=i;
-        slot.textContent=mark;
-        gameBoard.append(slot)
+    gamecells.forEach((mark, i) => {
+      const slot = document.createElement("div");
+      slot.classList.add("mycell");
+      slot.dataset.i = i;
+      slot.textContent = mark;
 
-    })
-     }
+      slot.addEventListener("click", () => {
+        if (placemark(i, currentplayer.getmark())) {
+          slot.textContent = currentplayer.getmark();
+          currentplayer = currentplayer === playeX ? playerO : playeX;
+        }
+      });
 
-      const resetBoard=()=>{
-        gamecells=["","","","","","","","",""];
-      }
+      gameBoard.append(slot);
+    });
+  }
 
-    return {getBoard,placemark, createBoard,resetBoard};
+  const resetBoard = () => {
+    gamecells = ["", "", "", "", "", "", "", "", ""];
+    createBoard();
+  };
+
+  return { getBoard, placemark, createBoard, resetBoard };
 };
 
- const displayBoard=()=>{
-  const playeX=myplayer("X","PlayerX");
-   const playerO=myplayer("O","PlayerO")
-  const squares=initialiseGame();
-   squares.getBoard();
-   squares.createBoard();
- 
- }
- 
- displayBoard();
+const displayBoard = () => {
+  const squares = initialiseGame();
+  squares.createBoard();
+};
+
+displayBoard();
