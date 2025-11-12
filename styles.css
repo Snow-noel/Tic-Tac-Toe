@@ -56,7 +56,7 @@
     color: white;
 }
 .turn{
-    color: white;
+    color: aquamarine;
     font-family: Lobster Two;
      font-size: 25px;
 }
@@ -72,11 +72,12 @@
     border-radius: 8px;
 }
 .X{
-    color: aliceblue;
+     color: aquamarine;
+    
     font-family: Lobster Two;
 }
 .O{
-    color: aquamarine;
+   color: aliceblue;
     font-family: Lobster Two;
 }
 @keyframes typing {

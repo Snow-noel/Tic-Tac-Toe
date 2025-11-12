@@ -18,9 +18,9 @@ const myplayer = (playermark, playername) => ({
 const initialiseGame = () => {
   let gameover=false
   let gamecells = ["", "", "", "", "", "", "", "", ""];
-  const playeX = myplayer("X", "PlayerX");
+  const playerX = myplayer("X", "PlayerX");
   const playerO = myplayer("O", "PlayerO");
-  let currentplayer = playeX;
+  let currentplayer = playerX;
   turn.textContent=`${currentplayer.getname()}'s Turn`
 
   const getBoard = () => gamecells;
@@ -71,7 +71,12 @@ function createBoard() {
           return;
             
           if(placemark(i, currentplayer.getmark())) {
-            slot.textContent = currentplayer.getmark(); 
+            slot.textContent = currentplayer.getmark();
+            
+              if(currentplayer.getmark()===playerX.getmark()){
+              turn.style.color="white"
+              slot.style.color="aquamarine";
+              }
             const winner=checkWinner();
             if(winner){
               turn.textContent=`Player${winner} Wins the Game`;
@@ -87,13 +92,17 @@ function createBoard() {
                 
                 return;
               }
-
-            currentplayer = currentplayer === playeX ? playerO : playeX;
-            turn.textContent=`${currentplayer.getname()}'s turn`;
+               
+            currentplayer = currentplayer === playerX ? playerO : playerX;
+             turn.textContent=`${currentplayer.getname()}'s turn`;
+            
+           
+            
           }
+          
       });
-
       gameBoard.append(slot);
+    
     });
      restart.addEventListener("click",()=>{
       const over=initialiseGame()
