@@ -21,6 +21,7 @@
     display: grid;
     grid-template-columns: repeat(3,80px);
     border-radius: 40px;
+    gap: 0.5rem;
     background-color: rgba(120,120,120, 0.9);
 }
 .mycell{
