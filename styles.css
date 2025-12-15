@@ -87,3 +87,19 @@
     }
     
 }
+#reward{
+    font-family: Lobster Two;
+    border-radius: 8px;
+    color: tomato;
+    padding: 1rem;
+    position: absolute;
+    left: 35rem;
+    top: 20rem;
+}
+.btn{
+    padding: 0.5rem;
+    background-color:rgba(120,120,120, 0.5);
+    border-radius: 10px;
+    color: white;
+
+}

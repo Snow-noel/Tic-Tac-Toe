@@ -8,9 +8,7 @@
 </head>
 <body>
    <main class="main-content">
-     <audio autoplay loop>
-        <source src="picture/my music.mp3" type="audio/mp3">
-    </audio>
+    
     <h1 class="heading">Tic Tac Toe</h1>
     <div class="player">  
         <h2 class="players">Players:</h2>
@@ -23,8 +21,21 @@
 
     </section>
     <h4 class="turn" id="playerturn"></h4>
+
+         <button class="btn" popovertarget="reward">
+        Claim rewards
+    </button>
+    <div id="reward" popover>
+        <button class="closed-btn" popovertarget="reward">
+            &times;
+        </button>
+        <h3>Congratulations!</h3>
+        <p>you earned <b>300 coins</b></p>
+    </div>
    </main> 
     
+
+
     <script src="game.js"></script>
 </body>
 </html>
